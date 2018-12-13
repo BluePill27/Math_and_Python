@@ -33,7 +33,7 @@ maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
 plt.hist(maxwell_hist, density=True, alpha=0.5, color='r', label='Sample_hist n=5')
 
 x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.std()/n))
+maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
 pdf_maxwell = maxwell_norm.pdf(x_maxwell)
 plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
 plt.ylabel('pdf')
@@ -52,7 +52,7 @@ maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
 plt.hist(maxwell_hist, density=True, alpha=0.5, color='g', label='Sample_hist n=25')
 
 x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.std()/n))
+maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
 pdf_maxwell = maxwell_norm.pdf(x_maxwell)
 plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
 plt.ylabel('pdf')
@@ -71,7 +71,7 @@ maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
 plt.hist(maxwell_hist, density=True, alpha=0.5, color='b', label='Sample_hist n=125')
 
 x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.std()/n))
+maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
 pdf_maxwell = maxwell_norm.pdf(x_maxwell)
 plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
 plt.ylabel('pdf')
@@ -90,7 +90,7 @@ maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
 plt.hist(maxwell_hist, density=True, alpha=0.5, color='purple', label='Sample_hist n=625')
 
 x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.std()/n))
+maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
 pdf_maxwell = maxwell_norm.pdf(x_maxwell)
 plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
 plt.ylabel('pdf')

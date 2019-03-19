@@ -1,3 +1,4 @@
+#modified notebook to run graph comparison as a function
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,79 +24,25 @@ plt.legend()
 plt.show()
 
 
-#MAXWELL 5
+#MAXWELL 5, 15, 125, 625
+def build_graph(mu, sigma, n):
+    maxwell = sts.maxwell(loc=mu, scale=sigma)
+    maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
+    plt.hist(maxwell_hist, density=True, alpha=0.5, color='r', label='Sample_hist n=5')
 
-mu = 15
-sigma = 15
-n = 5
-maxwell = sts.maxwell(loc=mu, scale=sigma)
-maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
-plt.hist(maxwell_hist, density=True, alpha=0.5, color='r', label='Sample_hist n=5')
+    x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
+    maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
+    pdf_maxwell = maxwell_norm.pdf(x_maxwell)
+    plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
+    plt.ylabel('pdf')
+    plt.xlabel('x')
+    plt.legend()
+    plt.show()
 
-x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
-pdf_maxwell = maxwell_norm.pdf(x_maxwell)
-plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
-plt.ylabel('pdf')
-plt.xlabel('x')
-plt.legend()
-plt.show()
+build_graph(15, 15, 5);
+build_graph(15, 15, 25);
+build_graph(15, 15, 125);
+build_graph(15, 15, 625);
 
-
-#MAXWELL 25
-
-mu = 15
-sigma = 15
-n = 25
-maxwell = sts.maxwell(loc=mu, scale=sigma)
-maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
-plt.hist(maxwell_hist, density=True, alpha=0.5, color='g', label='Sample_hist n=25')
-
-x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
-pdf_maxwell = maxwell_norm.pdf(x_maxwell)
-plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
-plt.ylabel('pdf')
-plt.xlabel('x')
-plt.legend()
-plt.show()
-
-
-#MAXWELL 125
-
-mu = 15
-sigma = 15
-n = 125
-maxwell = sts.maxwell(loc=mu, scale=sigma)
-maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
-plt.hist(maxwell_hist, density=True, alpha=0.5, color='b', label='Sample_hist n=125')
-
-x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
-pdf_maxwell = maxwell_norm.pdf(x_maxwell)
-plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
-plt.ylabel('pdf')
-plt.xlabel('x')
-plt.legend()
-plt.show()
-
-
-#MAXWELL
-
-mu = 15
-sigma = 15
-n = 625
-maxwell = sts.maxwell(loc=mu, scale=sigma)
-maxwell_hist = [maxwell.rvs(n).mean() for x in range(1000)]
-plt.hist(maxwell_hist, density=True, alpha=0.5, color='purple', label='Sample_hist n=625')
-
-x_maxwell = np.linspace((maxwell.expect()-4*sqrt(maxwell.std())), (maxwell.expect()+4*sqrt(maxwell.std())), 1000)
-maxwell_norm = sts.norm(maxwell.expect(), sqrt(maxwell.var()/n))
-pdf_maxwell = maxwell_norm.pdf(x_maxwell)
-plt.plot(x_maxwell, pdf_maxwell, label='Norm', color='black')
-plt.ylabel('pdf')
-plt.xlabel('x')
-plt.legend()
-plt.show()
 #maxwell.expect() #ожидаемое среднее
 #sqrt(maxwell.std()) #сигма = корень из дисперсии
